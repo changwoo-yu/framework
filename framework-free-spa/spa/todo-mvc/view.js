@@ -43,7 +43,9 @@ const getTodoCount = (todos) => {
  * targetElement와 state를 매개변수로 받는데 state는 currentFilter, todos 두개의 속성을 가지고 있음
  * cloneNode() 메서드는 DOM노드를 복제하는데 사용함
  * targetElement를 모든 자손까지 복제해서 element변수에 넣어줌
- * 복제한 element에서 list,counter,filters변수를 만들어서 querySelector를 통해 각각 클래스를 가져옴 
+ * 복제한 element에서 list,counter,filters변수를 만들어서 querySelector를 통해 각각 클래스를 가져옴
+ * todos에 map() 함수를 이용해서 getTodoElement 함수를 넣고 join() 사용해서 문자열로 합치고 list.innerHTML 이용해서 화면에 보여줌
+ * getTodoCount함수로 todos 갯수 세고 counter.textContent로 화면에 보여줌
  */
 export default (targetElement, state) => {
   const { currentFilter, todos } = state;
@@ -56,6 +58,12 @@ export default (targetElement, state) => {
 
   list.innerHTML = todos.map(getTodoElement).join("");
   counter.textContent = getTodoCount(todos);
+
+  /**
+   * Array.from() : 진짜 배열로 변환하는것
+   * filters에서 "li a" 요소를 querySelectorAll를 이용해서 모두 찾고 Array.from()을 이용해서 진짜 배열로 변환
+   * a 요소에 텍스트 내용이 currentFilter와 같으면 "selected"를 추가하고 같지 않으면 삭제를 forEach()를 이용해서 한 번씩 실행
+   */
 
   Array.from(filters.querySelectorAll("li a")).forEach((a) => {
     if (a.textContent === currentFilter) {

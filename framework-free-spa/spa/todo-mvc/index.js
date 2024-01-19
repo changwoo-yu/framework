@@ -2,9 +2,7 @@
 import getTodos from "./getTodos.js";
 import view from "./view.js";
 
-/**
- * @param {}
- */
+
 const state = {
   todos: getTodos(),
   currentFilter: "All",
